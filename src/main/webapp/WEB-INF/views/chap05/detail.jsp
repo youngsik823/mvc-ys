@@ -357,6 +357,23 @@
                 // console.log($rt.value);
                 // console.log($rw.value);
 
+
+                // 클라이언트 입력값 검증
+                if ($rt.value.trim() === '') {
+                    alert('댓글 내용은 필수입니다!');
+                    return;
+                }
+
+                else if ($rw.value.trim() === '') {
+                    alert('댓글 작성자 이름은 필수입니다!');
+                    return;
+                }
+                else if ($rw.value.trim().length < 2 || $rw.value.trim().length > 8) {
+                    alert('댓글 작성자 이름은 2~8자 사이로 작성하세요!');
+                    return;
+                }
+
+
                 // # 서버로 보낼 데이터
                 const payload = {
                     text: $rt.value,
@@ -378,7 +395,13 @@
                     .then(res => {
                         if (res.status === 200) {
                             alert('댓글이 정상 등록됨!');
-                            getReplyList(1);
+                            // 입력창 비우기
+                            $rt.value = '';
+                            $rw.value = '';
+
+                            // 마지막페이지 번호
+                            const lastPageNo = document.querySelector('.pagination').dataset.fp;
+                            getReplyList(lastPageNo);
                         } else {
                             alert('댓글 등록에 실패함!');
                         }
