@@ -199,5 +199,86 @@
         <!-- end replyModifyModal -->
         
     </div>
+
+
+    <script>
+        // 댓글 관련 스크립트
+        // 원본 글 번호
+        const bno = '${b.boardNo}';
+
+        // 댓글 요청 URI
+        const URL = '/api/v1/replies';
+
+        // 댓글 목록 렌더링 함수
+        function renderReplyList({
+            count, pageInfo, replies
+        }) {
+
+            // 총 댓글 수 렌더링
+            document.getElementById('replyCnt').textContent = count;
+
+            // 댓글 내용 렌더링
+            // 각 댓글 하나의 태그
+            let tag = '';
+
+            if (replies === null || replies.length === 0) {
+                tag += "<div id='replyContent' class='card-body'>댓글이 아직 없습니다! ㅠㅠ</div>";
+
+            } else {
+                for (let rep of replies) {
+
+                    const {rno, writer, text, regDate} = rep;
+
+                    tag += "<div id='replyContent' class='card-body' data-replyId='" + rno + "'>" +
+                        "    <div class='row user-block'>" +
+                        "       <span class='col-md-3'>" +
+                        "         <b>" + writer + "</b>" +
+                        "       </span>" +
+                        "       <span class='offset-md-6 col-md-3 text-right'><b>" + regDate +
+                        "</b></span>" +
+                        "    </div><br>" +
+                        "    <div class='row'>" +
+                        "       <div class='col-md-6'>" + text + "</div>" +
+                        "       <div et-md-2 col-md-4 text-right'>";
+
+                    // if (currentAccount === rep.account || auth === 'ADMIN') {
+                        tag +=
+                            "         <a id='replyModBtn' class='btn btn-sm btn-outline-dark' data-bs-toggle='modal' data-bs-target='#replyModifyModal'>수정</a>&nbsp;" +
+                            "         <a id='replyDelBtn' class='btn btn-sm btn-outline-dark' href='#'>삭제</a>";
+                    // }
+                    tag += "       </div>" +
+                        "    </div>" +
+                        " </div>";
+                }
+            }
+
+
+            // 생성된 댓글 tag 렌더링
+            document.getElementById('replyData').innerHTML = tag;
+
+        }
+
+
+        // 댓글 목록 불러오기 함수 
+        function getReplyList(page=1) {
+
+            fetch(`\${URL}/\${bno}/page/\${page}`)
+                .then(res => res.json())
+                .then(responseResult => {
+                    // console.log(responseResult);
+                    renderReplyList(responseResult);
+                });
+        }
+
+        //========= 메인 실행부 =========//
+        (function() {
+
+            // 첫 댓글 페이지 불러오기
+            getReplyList();
+
+        })();
+
+    </script>
+
 </body>
 </html>
