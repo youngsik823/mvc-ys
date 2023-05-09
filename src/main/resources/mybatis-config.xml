@@ -13,6 +13,7 @@
         <typeAlias alias="score" type="com.spring.mvc.chap04.entity.Score" />
         <typeAlias alias="board" type="com.spring.mvc.chap05.entity.Board" />
         <typeAlias alias="reply" type="com.spring.mvc.chap05.entity.Reply" />
+        <typeAlias alias="member" type="com.spring.mvc.chap05.entity.Member" />
     </typeAliases>
 
     <mappers>
@@ -21,6 +22,7 @@
         <mapper resource="mappers/PersonMapper.xml" />
         <mapper resource="mappers/BoardMapper.xml" />
         <mapper resource="mappers/ReplyMapper.xml" />
+        <mapper resource="mappers/MemberMapper.xml" />
     </mappers>
 
 
