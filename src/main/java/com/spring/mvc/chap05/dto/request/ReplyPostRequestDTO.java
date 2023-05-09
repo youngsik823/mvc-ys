@@ -3,7 +3,6 @@ package com.spring.mvc.chap05.dto.request;
 import com.spring.mvc.chap05.entity.Reply;
 import lombok.*;
 
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
