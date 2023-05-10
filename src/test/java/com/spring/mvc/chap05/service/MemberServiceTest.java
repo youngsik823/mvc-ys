@@ -1,5 +1,6 @@
 package com.spring.mvc.chap05.service;
 
+import com.spring.mvc.chap05.dto.LoginRequestDTO;
 import com.spring.mvc.chap05.dto.SignUpRequestDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,22 @@ class MemberServiceTest {
         dto.setEmail("aaa2@ddd.com");
         //when
         memberService.join(dto);
+    }
+
+    @Test
+    @DisplayName("계정명이 abc1234인 회원의 로그인시도 결과 검증을 " +
+            "상황별로 수행해야 한다.")
+    void loginTest() {
+        //given
+        LoginRequestDTO dto = new LoginRequestDTO();
+        dto.setAccount("abc1234");
+        dto.setPassword("aaa1234!");
+
+        //when
+        LoginResult result = memberService.authenticate(dto);
+
+        //then
+        assertEquals(LoginResult.SUCCESS, result);
     }
 
 }
