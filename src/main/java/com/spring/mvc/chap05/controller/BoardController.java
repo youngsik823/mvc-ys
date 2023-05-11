@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -33,7 +35,7 @@ public class BoardController {
             Search page,
             Model model,
             HttpServletRequest request
-    ) {
+    ) throws IOException {
 
         boolean flag = false;
 
@@ -51,7 +53,9 @@ public class BoardController {
 //                break;
 //            }
 //        }
-        if (!flag) return "redirect:/members/sign-in";
+        if (!flag) {
+            return "redirect:/members/sign-in";
+        }
 
         log.info("/board/list : GET");
         log.info("page : {}", page);
