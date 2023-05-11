@@ -36,14 +36,21 @@ public class BoardController {
     ) {
 
         boolean flag = false;
+
+        // 세션을 확인
+        Object login
+                = request.getSession().getAttribute("login");
+
+        if (login != null) flag = true;
+
         // 쿠키를 확인
-        Cookie[] cookies = request.getCookies();
-        for (Cookie c : cookies) {
-            if (c.getName().equals("login")) {
-                flag = true;
-                break;
-            }
-        }
+//        Cookie[] cookies = request.getCookies();
+//        for (Cookie c : cookies) {
+//            if (c.getName().equals("login")) {
+//                flag = true;
+//                break;
+//            }
+//        }
         if (!flag) return "redirect:/members/sign-in";
 
         log.info("/board/list : GET");
