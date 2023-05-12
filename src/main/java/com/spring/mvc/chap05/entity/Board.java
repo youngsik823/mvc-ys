@@ -27,6 +27,8 @@ public class Board {
     private String content; // 내용
     private int viewCount; // 조회수
     private LocalDateTime regDateTime; // 작성일자시간
+    private String account; // 작성자 계정명
+    private String writer; // 작성자 이름
 
     public Board(int boardNo, String title, String content) {
         this.boardNo = boardNo;

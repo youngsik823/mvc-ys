@@ -1,5 +1,6 @@
 package com.spring.mvc.chap05.controller;
 
+import com.spring.mvc.chap05.dto.response.BoardDetailResponseDTO;
 import com.spring.mvc.chap05.dto.response.BoardListResponseDTO;
 import com.spring.mvc.chap05.dto.request.BoardWriteRequestDTO;
 import com.spring.mvc.chap05.dto.page.PageMaker;
@@ -88,10 +89,10 @@ public class BoardController {
 
     // 글 등록 요청 처리
     @PostMapping("/write")
-    public String write(BoardWriteRequestDTO dto) {
+    public String write(BoardWriteRequestDTO dto, HttpSession session) {
 
         System.out.println("/board/write : POST");
-        boardService.register(dto);
+        boardService.register(dto, session);
         return "redirect:/board/list";
     }
 
@@ -107,7 +108,8 @@ public class BoardController {
     @GetMapping("/detail")
     public String detail(int bno, @ModelAttribute("s") Search search, Model model) {
         System.out.println("/board/detail : GET");
-        model.addAttribute("b", boardService.getDetail(bno));
+        BoardDetailResponseDTO detail = boardService.getDetail(bno);
+        model.addAttribute("b", detail);
 //        model.addAttribute("s", search);
 
 

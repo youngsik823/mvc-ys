@@ -25,16 +25,19 @@
 
     <select id="findOne" resultType="board">
         SELECT
-            board_no, title,
-            content, view_count, reg_date_time
-        FROM tbl_board
+            B.board_no, B.title,
+            B.content, B.view_count, B.reg_date_time,
+            B.account, M.name AS writer
+        FROM tbl_board B
+        JOIN tbl_member M
+        ON B.account = M.account
         WHERE board_no = #{boardNo}
     </select>
 
     <insert id="save">
         INSERT INTO tbl_board
-            (title, content)
-        VALUES (#{title}, #{content})
+            (title, content, account)
+        VALUES (#{title}, #{content}, #{account})
     </insert>
 
     <delete id="deleteByNo">

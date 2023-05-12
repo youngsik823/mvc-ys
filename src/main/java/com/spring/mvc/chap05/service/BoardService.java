@@ -6,9 +6,11 @@ import com.spring.mvc.chap05.dto.request.BoardWriteRequestDTO;
 import com.spring.mvc.chap05.dto.page.Search;
 import com.spring.mvc.chap05.entity.Board;
 import com.spring.mvc.chap05.repository.BoardMapper;
+import com.spring.mvc.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -32,8 +34,10 @@ public class BoardService {
     }
 
     // 글 등록 중간처리
-    public boolean register(BoardWriteRequestDTO dto) {
-        return boardRepository.save(new Board(dto));
+    public boolean register(BoardWriteRequestDTO dto, HttpSession session) {
+        Board board = new Board(dto);
+        board.setAccount(LoginUtil.getCurrentLoginMemberAccount(session));
+        return boardRepository.save(board);
     }
 
     public boolean delete(int bno) {
