@@ -7,7 +7,7 @@
     <select id="findAll" resultType="board">
         SELECT
             board_no, title,
-            content, view_count, reg_date_time
+            content, view_count, reg_date_time, account
         FROM tbl_board
         <if test="type == 'title'">
             WHERE title LIKE CONCAT('%', #{keyword}, '%')

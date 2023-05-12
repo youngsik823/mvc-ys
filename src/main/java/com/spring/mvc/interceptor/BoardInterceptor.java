@@ -30,6 +30,8 @@ public class BoardInterceptor
             return false;
         }
 
+        // 삭제요청을 한다면 자기가쓴글인지 체크
+
         log.info("board interceptor pass!!");
         return true;
     }
