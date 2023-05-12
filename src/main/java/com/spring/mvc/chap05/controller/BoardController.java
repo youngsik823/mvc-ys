@@ -5,6 +5,7 @@ import com.spring.mvc.chap05.dto.request.BoardWriteRequestDTO;
 import com.spring.mvc.chap05.dto.page.PageMaker;
 import com.spring.mvc.chap05.dto.page.Search;
 import com.spring.mvc.chap05.service.BoardService;
+import com.spring.mvc.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -37,13 +39,13 @@ public class BoardController {
             HttpServletRequest request
     ) throws IOException {
 
-        boolean flag = false;
-
-        // 세션을 확인
-        Object login
-                = request.getSession().getAttribute("login");
-
-        if (login != null) flag = true;
+//        boolean flag = false;
+//
+//        // 세션을 확인
+//        Object login
+//                = request.getSession().getAttribute("login");
+//
+//        if (login != null) flag = true;
 
         // 쿠키를 확인
 //        Cookie[] cookies = request.getCookies();
@@ -53,9 +55,9 @@ public class BoardController {
 //                break;
 //            }
 //        }
-        if (!flag) {
-            return "redirect:/members/sign-in";
-        }
+//        if (!flag) {
+//            return "redirect:/members/sign-in";
+//        }
 
         log.info("/board/list : GET");
         log.info("page : {}", page);
@@ -74,7 +76,12 @@ public class BoardController {
 
     // 글쓰기 화면 조회 요청
     @GetMapping("/write")
-    public String write() {
+    public String write(HttpSession session) {
+
+//        if (!LoginUtil.isLogin(session)) {
+//            return "redirect:/members/sign-in";
+//        }
+
         System.out.println("/board/write : GET");
         return "chap05/write";
     }

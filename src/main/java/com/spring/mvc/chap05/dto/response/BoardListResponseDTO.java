@@ -20,6 +20,7 @@ public class BoardListResponseDTO {
     private final String date; // 날짜패턴 yyyy-MM-dd HH:mm
     private final int viewCount;
 
+
     public BoardListResponseDTO(Board board) {
         this.boardNo = board.getBoardNo();
         this.shortTitle = makeShortTitle(board.getTitle());
