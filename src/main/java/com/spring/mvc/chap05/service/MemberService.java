@@ -84,6 +84,7 @@ public class MemberService {
                 .account(member.getAccount())
                 .nickName(member.getName())
                 .email(member.getEmail())
+                .auth(member.getAuth().toString())
                 .build();
         // 그 정보를 세션에 저장
         session.setAttribute(LoginUtil.LOGIN_KEY, dto);
