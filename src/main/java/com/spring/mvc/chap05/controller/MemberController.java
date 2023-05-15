@@ -83,7 +83,7 @@ public class MemberController {
 
         log.info("/members/sign-in POST ! - {}", dto);
 
-        LoginResult result = memberService.authenticate(dto);
+        LoginResult result = memberService.authenticate(dto, request.getSession(), response);
 
         // 로그인 성공시
         if (result == SUCCESS) {
