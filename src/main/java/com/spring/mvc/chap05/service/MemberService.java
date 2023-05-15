@@ -138,6 +138,7 @@ public class MemberService {
         // -> 쿠키의 수명을 0초로 만들어서 다시 클라이언트에게 응답
         if (c != null) {
             c.setMaxAge(0);
+            c.setPath("/");
             response.addCookie(c);
 
             // 3. 데이터베이스에도 자동로그인을 해제한다.
