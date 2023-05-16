@@ -46,7 +46,13 @@ public class FileUtil {
             e.printStackTrace();
         }
 
-        return "";
+        // 저장된 파일의 풀 경로
+        String fullPath = newPath + "/" + newFileName;
+
+        // fullPath = d:/abc/upload/2023/05/16/djsf.jpg
+        // rootPath = d:/abc/upload/
+
+        return fullPath.substring(rootPath.length() - 1);
     }
 
     /**

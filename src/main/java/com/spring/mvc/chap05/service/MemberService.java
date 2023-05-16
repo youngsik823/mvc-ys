@@ -31,7 +31,9 @@ public class MemberService {
     private final PasswordEncoder encoder;
 
     // 회원가입 처리 서비스
-    public boolean join(final SignUpRequestDTO dto) {
+    public boolean join(
+            final SignUpRequestDTO dto,
+            final String savePath) {
 
         // dto를 entity로 변환
         Member member = Member.builder()
@@ -39,6 +41,7 @@ public class MemberService {
                 .email(dto.getEmail())
                 .name(dto.getName())
                 .password(encoder.encode(dto.getPassword()))
+                .profileImage(savePath)
                 .build();
 
         // 매퍼에게 회원정보 전달해서 저장명령
