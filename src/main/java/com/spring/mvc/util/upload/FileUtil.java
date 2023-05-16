@@ -52,7 +52,7 @@ public class FileUtil {
         // fullPath = d:/abc/upload/2023/05/16/djsf.jpg
         // rootPath = d:/abc/upload/
 
-        return fullPath.substring(rootPath.length() - 1);
+        return fullPath.substring(rootPath.length());
     }
 
     /**
