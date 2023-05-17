@@ -413,7 +413,7 @@
                             alert('댓글이 정상 등록됨!');
                             // 입력창 비우기
                             $rt.value = '';
-                            $rw.value = '';
+                            // $rw.value = '';
 
                             // 마지막페이지 번호
                             const lastPageNo = document.querySelector('.pagination').dataset.fp;
